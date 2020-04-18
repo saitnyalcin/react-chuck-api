@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import logo from '../src/images/chuck-norris.png';
 import './App.css';
 
 function App() {
+  const [chuchFact, setChuchFact] = useState({ data: {} });
+
+  async function fetchData() {
+    const result = await fetch(
+      'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random',
+      {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com',
+          'x-rapidapi-key':
+            '920767e39amsha50bf0f39380cd2p169483jsnd1a1c7865e50',
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    result.json().then(result => setChuchFact(result));
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App-header">
+        <div className="App-logo">
+          <img src={logo} alt="" />
+        </div>
+      </div>
+
+      <div className="container">
+        <div>
+          <img className="icon" src={chuchFact.icon_url} alt="" />
+        </div>
+        <blockquote>{chuchFact.value}</blockquote>
+      </div>
     </div>
   );
 }
