@@ -3,7 +3,7 @@ import logo from '../src/images/chuck-norris.png';
 import './App.css';
 
 function App() {
-  const [chuchFact, setChuchFact] = useState({ data: {} });
+  const [chuckFact, setChuchFact] = useState({ data: {} });
 
   async function fetchData() {
     const result = await fetch(
@@ -37,9 +37,9 @@ function App() {
 
       <div className="container">
         <div>
-          <img className="icon" src={chuchFact.icon_url} alt="" />
+          <img className="icon" src={chuckFact.icon_url} alt="" />
         </div>
-        <blockquote>{chuchFact.value}</blockquote>
+        <blockquote>{chuckFact.value}</blockquote>
       </div>
     </div>
   );
